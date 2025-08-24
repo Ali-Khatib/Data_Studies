@@ -8,7 +8,7 @@ from io import BytesIO
 df = pd.read_csv(r"C:\Users\user\PycharmProjects\TMDB_Project\tmdbfile\movies.csv")
 
 # Quick clean-up
-df = df.dropna(subset=["title", "genres", "vote_average", "release_date"])
+df = df.dropna(subset=["title", "vote_average", "release_date"])
 
 # Function to convert plots to base64 HTML <img>
 def plot_to_html(fig):
@@ -34,22 +34,7 @@ html_parts.append(plot_to_html(fig))
 plt.close(fig)
 
 # ==========================
-# 2. Top 10 Genres
-# ==========================
-genres = df["genres"].str.split("|").explode()
-top_genres = genres.value_counts().head(10)
-
-fig, ax = plt.subplots(figsize=(10,6))
-sns.barplot(x=top_genres.values, y=top_genres.index, palette="viridis", ax=ax)
-ax.set_title("Top 10 Genres")
-ax.set_xlabel("Number of Movies")
-ax.set_ylabel("Genre")
-html_parts.append("<h2>Top 10 Genres</h2>")
-html_parts.append(plot_to_html(fig))
-plt.close(fig)
-
-# ==========================
-# 3. Movies per Year
+# 2. Movies per Year
 # ==========================
 df["release_year"] = pd.to_datetime(df["release_date"], errors="coerce").dt.year
 movies_per_year = df["release_year"].value_counts().sort_index()
@@ -69,7 +54,6 @@ plt.close(fig)
 summary = f"""
 <ul>
 <li>Movie ratings are mostly between 5 and 7.</li>
-<li>Most common genres: {', '.join(top_genres.index[:5])}.</li>
 <li>Dataset covers years {int(movies_per_year.index.min())} to {int(movies_per_year.index.max())}.</li>
 <li>Movie releases peaked in recent years.</li>
 </ul>
