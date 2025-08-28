@@ -5,7 +5,7 @@ import base64
 from io import BytesIO
 
 # Load dataset
-df = pd.read_csv(r"C:\Users\user\PycharmProjects\TMDB_Project\tmdbfile\movies.csv")
+df = pd.read_csv(r"/tmdbfile/movies.csv")
 
 # Quick clean-up
 df = df.dropna(subset=["title", "vote_average", "release_date"])

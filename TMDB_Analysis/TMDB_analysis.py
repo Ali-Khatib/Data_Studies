@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # -------------------------
 # Load the dataset
 # -------------------------
-csv_file = r"C:\Users\user\PycharmProjects\TMDB_Project\tmdbfile\movies.csv"
+csv_file = r"/tmdbfile/movies.csv"
 df = pd.read_csv(csv_file)
 
 # Preview dataset
@@ -51,7 +51,7 @@ plt.scatter(df['vote_count'], df['popularity'], alpha=0.6, color='green')
 plt.xlabel('Vote Count')
 plt.ylabel('Popularity')
 plt.title('Popularity vs Vote Count')
-plt.xscale('log')  # use log scale to handle big differences
+plt.xscale('log')
 plt.show()
 
 # -------------------------
